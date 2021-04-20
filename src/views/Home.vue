@@ -17,6 +17,7 @@ import { Getter, Action } from "vuex-class";
 import * as Namespace from "@/namespaces";
 import { CatImage, CatState } from "@/store/types";
 import CatTable from "@/components/CatTable.vue";
+import { ActionMethod } from "vuex";
 
 @Component({
   components: {
@@ -29,8 +30,8 @@ export default class Home extends Vue {
   @Getter(Namespace.GET_NAVIGATION)
   public navigation!: CatState["navigation"];
   @Action(Namespace.ACTION_NEXT_PAGE)
-  public goNextPage!: any;
+  public goNextPage!: ActionMethod;
   @Action(Namespace.ACTION_PREV_PAGE)
-  public goPrevPage!: any;
+  public goPrevPage!: ActionMethod;
 }
 </script>

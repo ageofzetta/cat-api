@@ -1,15 +1,15 @@
 import { ActionTree, ActionContext } from "vuex";
-import { IRootState, CatState, CatImage } from "@/store/types";
+import { CatState, CatImage } from "@/store/types";
 import * as Namespace from "@/namespaces";
 import services from "@/store/services";
 
-const actions: ActionTree<CatState, IRootState> = {
+const actions: ActionTree<CatState, CatState> = {
   ...services,
   [Namespace.ORQST_REFRESH_CAT_IMAGES]: async ({
     state,
     dispatch,
     commit,
-  }: ActionContext<CatState, IRootState>): Promise<CatState> => {
+  }: ActionContext<CatState, CatState>): Promise<CatState> => {
     const allCatImages: CatImage[] = await dispatch(
       Namespace.SERVICE_REQ_CAT_IMAGES
     );
@@ -17,7 +17,7 @@ const actions: ActionTree<CatState, IRootState> = {
     return state;
   },
   [Namespace.ORQST_REFRESH_SELECTED_CAT]: async (
-    { state, dispatch, commit }: ActionContext<CatState, IRootState>,
+    { state, dispatch, commit }: ActionContext<CatState, CatState>,
     payload: string
   ): Promise<CatState> => {
     const selectedCat: CatImage = await dispatch(
@@ -32,10 +32,10 @@ const actions: ActionTree<CatState, IRootState> = {
     dispatch,
     commit,
     getters,
-  }: ActionContext<CatState, IRootState>): Promise<CatState> => {
+  }: ActionContext<CatState, CatState>): Promise<CatState> => {
     const oldNavigation: CatState["navigation"] =
       getters[Namespace.GET_NAVIGATION];
-    const { nextPage, currentPage, prevPage } = oldNavigation;
+    const { nextPage, currentPage } = oldNavigation;
     if (!nextPage) return state;
     const current = currentPage + 1;
     const newNavigation: CatState["navigation"] = {
@@ -53,10 +53,10 @@ const actions: ActionTree<CatState, IRootState> = {
     dispatch,
     commit,
     getters,
-  }: ActionContext<CatState, IRootState>): Promise<CatState> => {
+  }: ActionContext<CatState, CatState>): Promise<CatState> => {
     const oldNavigation: CatState["navigation"] =
       getters[Namespace.GET_NAVIGATION];
-    const { nextPage, currentPage, prevPage } = oldNavigation;
+    const { currentPage, prevPage } = oldNavigation;
     if (prevPage === null) return state;
     const current = currentPage > 1 ? currentPage - 1 : currentPage;
 

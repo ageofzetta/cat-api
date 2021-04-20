@@ -1,6 +1,6 @@
-import { ActionTree, ActionContext } from "vuex";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { CatAPIResponse, CatImage, IRootState } from "./types";
+import { ActionTree } from "vuex";
+import { AxiosResponse } from "axios";
+import { CatImage, IRootState } from "./types";
 import * as Namespace from "@/namespaces";
 import { CatState } from "./types";
 import axios from "../services/AxiosInstance";
@@ -9,7 +9,6 @@ import axios from "../services/AxiosInstance";
 
 const services: ActionTree<CatState, IRootState> = {
   [Namespace.SERVICE_REQ_CAT_IMAGES]: async ({
-    state,
     getters,
   }): Promise<CatImage[]> => {
     const { currentPage, itemsPerPage }: CatState["navigation"] = getters[

@@ -7,15 +7,14 @@ import mutations from "@/store/mutations";
 
 import Vue from "vue";
 import Vuex from "vuex";
-
-import { CatState, IRootState } from "./types";
+import { CatState } from "./types";
 
 Vue.use(Vuex);
 
-const ApplicationStore: StoreOptions<any> = {
+const ApplicationStore: StoreOptions<CatState> = {
   actions,
   getters,
   mutations,
   state: deepClone(initialState),
 };
-export default new Vuex.Store<any>(ApplicationStore);
+export default new Vuex.Store<CatState>(ApplicationStore);

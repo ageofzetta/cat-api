@@ -1,9 +1,8 @@
 import { GetterTree } from "vuex";
-import { CatImage, IRootState } from "@/store/types";
+import { CatImage, CatState } from "@/store/types";
 import * as Namespace from "@/namespaces";
-import { CatState, CatBreed } from "@/store/types";
 
-const getters: GetterTree<CatState, IRootState> = {
+const getters: GetterTree<CatState, CatState> = {
   [Namespace.GET_CAT_IMAGES]: (state: CatState): CatImage[] => {
     return state.images;
   },

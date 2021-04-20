@@ -5,9 +5,9 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Getter, Action } from "vuex-class";
+import { Getter } from "vuex-class";
 import * as Namespace from "@/namespaces";
-import { CatImage, CatState } from "@/store/types";
+import { CatImage } from "@/store/types";
 
 @Component({
   components: {},
