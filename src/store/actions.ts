@@ -3,6 +3,15 @@ import { CatState, CatImage } from "@/store/types";
 import * as Namespace from "@/namespaces";
 import services from "@/store/services";
 
+const buildNavigation = (currentPage: number): CatState["navigation"] => {
+  const prevPage = currentPage - 1 < 0 ? null : currentPage - 1;
+  return {
+    currentPage,
+    prevPage,
+    nextPage: currentPage + 1,
+    itemsPerPage: 0,
+  };
+};
 const actions: ActionTree<CatState, CatState> = {
   ...services,
   [Namespace.ORQST_REFRESH_CAT_IMAGES]: async ({
@@ -44,15 +53,13 @@ const actions: ActionTree<CatState, CatState> = {
   }: ActionContext<CatState, CatState>): Promise<CatState> => {
     const oldNavigation: CatState["navigation"] =
       getters[Namespace.GET_NAVIGATION];
-    const { nextPage, currentPage } = oldNavigation;
-    if (!nextPage) return state;
+    const { currentPage } = oldNavigation;
     const current = currentPage + 1;
     const newNavigation: CatState["navigation"] = {
-      ...oldNavigation,
-      nextPage: current + 1,
-      currentPage: current,
-      prevPage: current - 1,
+      ...buildNavigation(current),
+      itemsPerPage: oldNavigation.itemsPerPage,
     };
+
     commit(Namespace.MTT_NAVIGATION, newNavigation);
     await dispatch(Namespace.ORQST_REFRESH_CAT_IMAGES);
     return state;
@@ -67,13 +74,10 @@ const actions: ActionTree<CatState, CatState> = {
       getters[Namespace.GET_NAVIGATION];
     const { currentPage, prevPage } = oldNavigation;
     if (prevPage === null) return state;
-    const current = currentPage > 1 ? currentPage - 1 : currentPage;
-
+    const current = Math.max(currentPage - 1, 0);
     const newNavigation: CatState["navigation"] = {
-      ...oldNavigation,
-      nextPage: current + 1,
-      currentPage: current,
-      prevPage: current > 0 ? current - 1 : null,
+      ...buildNavigation(current),
+      itemsPerPage: oldNavigation.itemsPerPage,
     };
     commit(Namespace.MTT_NAVIGATION, newNavigation);
     await dispatch(Namespace.ORQST_REFRESH_CAT_IMAGES);
