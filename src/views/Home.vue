@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <button
+      @click.prevent="goPrevPage"
+      :disabled="navigation.prevPage === null"
+    >
+      Prev
+    </button>
+    <button @click.prevent="goNextPage">Next</button>
+    <CatTable :cats="catImages" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { Getter, Action } from "vuex-class";
+import * as Namespace from "@/namespaces";
+import { CatImage, CatState } from "@/store/types";
+import CatTable from '@/components/CatTable.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    CatTable,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  @Getter(Namespace.GET_CAT_IMAGES)
+  public catImages!: CatImage[];
+  @Getter(Namespace.GET_NAVIGATION)
+  public navigation!: CatState["navigation"];
+  @Action(Namespace.ACTION_NEXT_PAGE)
+  public goNextPage!: any;
+  @Action(Namespace.ACTION_PREV_PAGE)
+  public goPrevPage!: any;
+}
 </script>
