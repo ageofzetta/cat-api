@@ -1,5 +1,8 @@
 # cat-api
 
+Sample test project RVezy
+This app is hosted @ https://cat-api-33f45.web.app/
+
 ## Project setup
 ```
 npm install
