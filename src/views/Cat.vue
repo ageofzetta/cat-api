@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <img :src="selectedCat.url" v-if="selectedCat"/>
+    <img :src="selectedCat.url" v-if="selectedCat" />
   </div>
 </template>
 <script lang="ts">

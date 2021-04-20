@@ -8,7 +8,6 @@ import mutations from "@/store/mutations";
 import Vue from "vue";
 import Vuex from "vuex";
 
-
 import { CatState, IRootState } from "./types";
 
 Vue.use(Vuex);

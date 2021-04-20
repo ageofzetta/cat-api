@@ -5,7 +5,6 @@ import * as guards from "./guards";
 import Home from "../views/Home.vue";
 import Cat from "../views/Cat.vue";
 
-
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
