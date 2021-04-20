@@ -2,6 +2,7 @@
   <div class="home">
     <Navigation />
     <CatTable :cats="catImages" />
+    <Navigation />
   </div>
 </template>
 
