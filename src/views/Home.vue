@@ -25,7 +25,7 @@ import { ActionMethod } from "vuex";
   },
 })
 export default class Home extends Vue {
-  @Getter(Namespace.GET_CAT_IMAGES)
+  @Getter(Namespace.GET_VISIBLE_CAT_IMAGE)
   public catImages!: CatImage[];
   @Getter(Namespace.GET_NAVIGATION)
   public navigation!: CatState["navigation"];

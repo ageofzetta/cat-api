@@ -8,12 +8,21 @@ const actions: ActionTree<CatState, CatState> = {
   [Namespace.ORQST_REFRESH_CAT_IMAGES]: async ({
     state,
     dispatch,
+    getters,
     commit,
   }: ActionContext<CatState, CatState>): Promise<CatState> => {
-    const allCatImages: CatImage[] = await dispatch(
+    const allCatImages: CatImage[] = getters[Namespace.GET_CAT_IMAGES];
+    const { currentPage, itemsPerPage }: CatState["navigation"] = getters[
+      Namespace.GET_NAVIGATION
+    ];
+    const totalPages = allCatImages.length / itemsPerPage;
+    if (totalPages > currentPage) {
+      return state;
+    }
+    const newCatImages: CatImage[] = await dispatch(
       Namespace.SERVICE_REQ_CAT_IMAGES
     );
-    commit(Namespace.MTT_CAT_IMAGES, allCatImages);
+    commit(Namespace.MTT_CAT_IMAGES, newCatImages);
     return state;
   },
   [Namespace.ORQST_REFRESH_SELECTED_CAT]: async (

@@ -6,7 +6,10 @@ import { CatState, CatBreed } from "@/store/types";
 
 const mutations: MutationTree<CatState> = {
   [Namespace.MTT_CAT_IMAGES]: (state: CatState, payload: CatBreed[]): void => {
-    Vue.set(state, "images", payload.slice() as CatBreed[]);
+    const sampleImage = payload[0];
+    if (!state.images.find((image) => image.id === sampleImage.id)) {
+      Vue.set(state, "images", [...state.images, ...payload] as CatBreed[]);
+    }
   },
   [Namespace.MTT_SELECTED_CAT]: (state: CatState, payload: CatBreed): void => {
     Vue.set(state, "selectedCat", deepClone(payload));
