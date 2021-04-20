@@ -5,8 +5,6 @@ import * as Namespace from "@/namespaces";
 import { CatState } from "./types";
 import axios from "../services/AxiosInstance";
 
-// TODO: Cache images
-
 const services: ActionTree<CatState, IRootState> = {
   [Namespace.SERVICE_REQ_CAT_IMAGES]: async ({
     getters,
