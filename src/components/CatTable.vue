@@ -23,6 +23,7 @@ export default class HelloWorld extends Vue {
 <style scoped lang="scss">
 .cat-images {
   max-width: 700px;
+  min-height: 400px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
